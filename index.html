@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Web Server</h1>
+    </header>
+    <div class="container">
+        <h2>Welcome to the Simple Web Server</h2>
+        <p>This is a basic web server built using Node.js that serves this HTML page.</p>
+        <p>You can customize this page and add more functionality as needed.</p>
+
+        <!-- Placeholder for displaying the date and time -->
+        <p><strong>Current Date and Time:</strong> <span id="datetime"></span></p>
+    </div>
+
+    <script>
+        // Function to update the date and time
+        function updateDateTime() {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+    
+            // Define the callback function to handle the response
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var dateTime = new Date(xhr.responseText);
+                    document.getElementById('datetime').textContent = dateTime.toLocaleString();
+                } else {
+                    console.error('Failed to fetch date and time from the server');
+                }
+            };
+    
+            // Open a GET request to the server endpoint (you need to define this endpoint in your server)
+            xhr.open('GET', '/getDateTime', true);
+            xhr.send();
+        }
+    
+        // Call the updateDateTime function when the page loads
+        window.addEventListener('load', updateDateTime);
+    </script>
+    
+</body>
+</html>
